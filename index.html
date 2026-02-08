@@ -89,60 +89,51 @@
             <img src="riddhima.jpg">
         </div>
         <h1 id="question">Riddhima, will you be my Valentine? ❤️</h1>
-        <p id="message" style="color: #ff4d6d; font-weight: bold;"></p>
+        <p id="msg" style="
+margin-top:15px;
+font-size:18px;
+font-weight:bold;
+background:rgba(255,255,255,0.2);
+padding:10px 15px;
+border-radius:15px;
+min-height:40px;
+"></p>
         
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">YES!</button>
             <button id="noBtn" onmouseover="moveButton()" onclick="changeText()">No</button>
         </div>
     </div>
+<script>
+const messages = [
+  "Please love, aap nahi to kaun? 🥺",
+  "Who’s my jaan? 💖",
+  "I love you naaa 😘",
+  "Dekho apan ek dusre ko ab maut tak jaante hai 🫶",
+  "Aapko SRK ki kasam, maan jao na 🥹❤️"
+];
 
-    <script>
-        const noTexts = [
-            "Please love ap nhi to kon?",
-            "Whos my jaan? 🥺",
-            "I love uh naaa...",
-            "Dekho apan ekdusre ko maut tak jante h!",
-            "Apkooooo SRK ki kasam maan jao na! 🤴"
-        ];
-        let textIndex = 0;
+let textIndex = 0;
 
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            document.getElementById('noBtn').style.position = 'absolute';
-            document.getElementById('noBtn').style.left = x + 'px';
-            document.getElementById('noBtn').style.top = y + 'px';
-        }
+function move() {
+  const noBtn = document.getElementById("no");
+  const msg = document.getElementById("msg");
 
-        function changeText() {
-            document.getElementById('message').innerText = noTexts[textIndex];
-            textIndex = (textIndex + 1) % noTexts.length;
-            
-            // Make the Yes button grow every time she clicks No!
-            let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            document.getElementById('yesBtn').style.fontSize = (currentSize + 5) + "px";
-            document.getElementById('yesBtn').style.padding = (currentSize + 2) + "px";
-        }
+  noBtn.style.left = Math.random() * 80 + "vw";
+  noBtn.style.top  = Math.random() * 80 + "vh";
 
-        function celebrate() {
-            document.querySelector('.container').innerHTML = `
-                <h1 style="font-size: 3rem;">YAYYY! ❤️</h1>
-                <p>I love you Riddhima! You've made me the happiest person!</p>
-                <div style="font-size: 50px;">👩‍❤️‍👨✨</div>
-            `;
-            setInterval(createHeart, 300);
-        }
+  msg.innerText = messages[textIndex];
+  textIndex = (textIndex + 1) % messages.length;
+}
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-hearts');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
-    </script>
-</body>
-</html>
+function yes() {
+  document.body.innerHTML = `
+    <h1 style="color:white;text-align:center;margin-top:40vh;">
+      YAYYYY 💖💖💖<br>
+      I knew it 😘<br>
+      Happy Valentine’s Day ❤️
+    </h1>
+  `;
+}
+</script>
+    
