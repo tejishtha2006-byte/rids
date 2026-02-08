@@ -1,187 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Valentine 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Riddhima</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
 
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-  }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            z-index: 10;
+        }
 
-  .box {
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    text-align: center;
-    width: 320px;
-    position: relative;
-    z-index: 2;
-  }
+        h1 { color: #d63384; margin-bottom: 20px; }
+        
+        .photo-slot {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            border: 5px solid #ff85a2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-  h2 {
-    margin-bottom: 25px;
-  }
+        /* TIP: Replace the URL below with an actual photo of Riddhima */
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-  button {
-    padding: 10px 22px;
-    font-size: 16px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-  }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-  #yesBtn {
-    background: #ff4d6d;
-    color: white;
-  }
+        button {
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
 
-  #noBtn {
-    background: #999;
-    color: white;
-    position: absolute;
-    left: 55%;
-    top: 65%;
-  }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; position: relative; }
 
-  /* Floating hearts */
-  .heart {
-    position: absolute;
-    bottom: -20px;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.7;
-  }
+        .floating-hearts {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: float 3s linear infinite;
+            opacity: 0;
+        }
 
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-110vh) scale(1.8);
-      opacity: 0;
-    }
-  }
-
-  /* Popup */
-  .popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-  }
-
-  .popup-content {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    width: 300px;
-  }
-</style>
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Romantic music -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_2b0c9b62c0.mp3" type="audio/mpeg">
-</audio>
-
-<div class="box">
-  <h2>Riddhima 💕<br>Will you be my Valentine?</h2>
-  <button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
-  <button id="noBtn" onclick="noClicked()">No 🙈</button>
-</div>
-
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <p id="popupText"></p>
-    <button onclick="closePopup()">Okay 🥹</button>
-  </div>
-</div>
-
-<script>
-const noBtn = document.getElementById("noBtn");
-const popup = document.getElementById("popup");
-const popupText = document.getElementById("popupText");
-const music = document.getElementById("bgMusic");
-
-const messages = [
-  "Love… aap nahi toh kaun? 🥺❤️",
-  "Who’s my jaan agar aap nahi? 😭",
-  "I love you naaa 🫶",
-  "Dekho apan ek-dusre ko ab maut tak jaante hain 💍",
-  "Aapko SRK ki kasam… maan jao na 🥹✨"
-];
-
-let index = 0;
-let musicPlayed = false;
-
-function noClicked() {
-  if (!musicPlayed) {
-    music.play();
-    musicPlayed = true;
-  }
-
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = translate(${x}px, ${y}px);
-
-  popupText.innerText = messages[index % messages.length];
-  index++;
-
-  popup.style.display = "flex";
-}
-
-function closePopup() {
-  popup.style.display = "none";
-}
-
-function yesClicked() {
-  music.play();
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(135deg,#ff4d6d,#ff8fab);
-      color:white;
-      text-align:center;
-      font-size:26px;
-      padding:20px;
-    ">
-      💖 Yayyyy 💖<br><br>
-      I knew it 🥹✨<br>
-      Happy Valentine’s Day ❤️
+    <div class="container">
+        <div class="photo-slot">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_6uYpM8-sI9pP3v8w15y5fL_7T6S4w5mHZw&s" alt="Beautiful Riddhima">
+        </div>
+        <h1 id="question">Riddhima, will you be my Valentine? ❤️</h1>
+        <p id="message" style="color: #ff4d6d; font-weight: bold;"></p>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">YES!</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="changeText()">No</button>
+        </div>
     </div>
-  `;
-}
 
-// Hearts animation
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-  document.body.appendChild(heart);
+    <script>
+        const noTexts = [
+            "Please love ap nhi to kon?",
+            "Whos my jaan? 🥺",
+            "I love uh naaa...",
+            "Dekho apan ekdusre ko maut tak jante h!",
+            "Apkooooo SRK ki kasam maan jao na! 🤴"
+        ];
+        let textIndex = 0;
 
-  setTimeout(() => heart.remove(), 7000);
-}, 500);
-</script>
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            document.getElementById('noBtn').style.position = 'absolute';
+            document.getElementById('noBtn').style.left = x + 'px';
+            document.getElementById('noBtn').style.top = y + 'px';
+        }
 
+        function changeText() {
+            document.getElementById('message').innerText = noTexts[textIndex];
+            textIndex = (textIndex + 1) % noTexts.length;
+            
+            // Make the Yes button grow every time she clicks No!
+            let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            document.getElementById('yesBtn').style.fontSize = (currentSize + 5) + "px";
+            document.getElementById('yesBtn').style.padding = (currentSize + 2) + "px";
+        }
+
+        function celebrate() {
+            document.querySelector('.container').innerHTML = `
+                <h1 style="font-size: 3rem;">YAYYY! ❤️</h1>
+                <p>I love you Riddhima! You've made me the happiest person!</p>
+                <div style="font-size: 50px;">👩‍❤️‍👨✨</div>
+            `;
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-hearts');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+    </script>
 </body>
 </html>
